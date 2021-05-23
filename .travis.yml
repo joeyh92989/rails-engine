@@ -9,5 +9,5 @@ before_install:
   - bundle
 script:
 - bundle exec rails db:{create,migrate,seed} RAILS_ENV=test
-- rails db:schema:dump
+# - rails db:schema:dump
 - bundle exec rspec
