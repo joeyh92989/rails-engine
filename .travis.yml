@@ -1,0 +1,13 @@
+language: ruby
+rbenv:
+- 2.5.3
+addons:
+  postgresql: 9.6
+before_install:
+  - gem install bundler
+  - nvm install node
+  - bundle
+script:
+- bundle exec rails db:{create,migrate,seed} RAILS_ENV=test
+# - rails db:schema:dump
+- bundle exec rspec
