@@ -8,6 +8,6 @@ before_install:
   - nvm install node
   - bundle
 script:
-- rails db:{create,migrate,seed} RAILS_ENV=test
+- bundle exec rails db:{drop,create,migrate,seed} RAILS_ENV=test
 # - rails db:schema:dump
 - bundle exec rspec
