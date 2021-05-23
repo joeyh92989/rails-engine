@@ -71,3 +71,9 @@ VCR.configure do |config|
   # This line lets cassettes re-record as needed
   # config.default_cassette_options = { record: :new_episodes, re_record_interval: 7.days }
 end
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end

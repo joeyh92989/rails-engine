@@ -28,13 +28,10 @@ gem 'sinatra'
 group :development, :test do
   gem 'pry'
   gem 'travis'
-  gem 'rspec-rails'
-  gem 'capybara'
+
   gem 'launchy'
-  gem 'simplecov'
-  gem 'orderly'
+
   gem 'nyan-cat-formatter'
-  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -45,6 +42,10 @@ end
 group :test do
   gem 'webmock'
   gem 'vcr'
+  gem 'shoulda-matchers'
+    gem 'simplecov'
+  gem 'orderly'
+    gem 'rspec-rails'
 end
 
 
