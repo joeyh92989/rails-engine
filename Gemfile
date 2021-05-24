@@ -24,14 +24,15 @@ gem 'rubocop-rspec'
 gem 'faraday'
 gem 'json'
 gem 'sinatra'
+gem 'fast_jsonapi'
 
 group :development, :test do
   gem 'pry'
   gem 'travis'
-
   gem 'launchy'
-
   gem 'nyan-cat-formatter'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
