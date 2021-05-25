@@ -7,11 +7,14 @@ class Api::V1::MerchantsController < ApplicationController
            end
     results_per_page = if params[:per_page].nil? || params[:per_page].to_i <= 0
                          20
-
                        else
                          params[:per_page].to_i
                        end
-    merchants = Merchant.limit(results_per_page).offset((page - 1) * results_per_page)
-    render json: MerchantSerializer.new(merchants)
+    if results_per_page >= Merchant.all.count
+      render json: MerchantSerializer.new(Merchant.all)
+    else
+      merchants = Merchant.limit(results_per_page).offset((page - 1) * results_per_page)
+      render json: MerchantSerializer.new(merchants)
+    end
   end
 end

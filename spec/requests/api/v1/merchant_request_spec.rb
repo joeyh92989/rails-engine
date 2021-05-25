@@ -75,6 +75,14 @@ describe 'Merchants' do
         merchants = JSON.parse(response.body, symbolize_names: true)
         expect(merchants[:data].count).to eq(20)
       end
+      it 'returns all merchants if per_page is too high' do
+        create_list(:merchant, 50)
+
+        get '/api/v1/merchants', params: { per_page: 999 }
+        expect(response).to be_successful
+        merchants = JSON.parse(response.body, symbolize_names: true)
+        expect(merchants[:data].count).to eq(50)
+      end
     end
   end
 end
