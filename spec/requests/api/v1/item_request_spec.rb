@@ -89,14 +89,15 @@ describe 'Items' do
       end
     end
   end
+
   describe 'items show' do
     describe 'Happy Path' do
       it 'returns one Item' do
-        item_1= create :item
+        item_1 = create :item
 
         get "/api/v1/items/#{item_1.id}"
         item = JSON.parse(response.body, symbolize_names: true)
-        
+
         expect(response).to be_successful
         expect(item.count).to eq(1)
         expect(item).to be_a Hash
@@ -104,16 +105,46 @@ describe 'Items' do
         expect(item[:data][:attributes]).to have_key(:name)
       end
     end
+
     describe 'Sad Path' do
       it 'returns no Item if sent bad id' do
-        item_1= create :item, id: 1
+        item_1 = create :item, id: 1
 
-        get "/api/v1/items/#{50}"
+        get '/api/v1/items/50'
         item = JSON.parse(response.body, symbolize_names: true)
         expect(response.status).to eq(404)
         expect(item.count).to eq(1)
         expect(item).to be_a Hash
         expect(item[:data]).to eq([])
+      end
+    end
+  end
+  describe 'item create' do
+    describe 'Happy Path' do
+      it 'creates a new item and returns it as a response' do
+        merchant = create :merchant
+        post '/api/v1/items',
+             params: { name: 'test', description: 'lorem ipsum', unit_price: 19.50, merchant_id: merchant.id }
+
+        item = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response).to be_successful
+        expect(response.status).to eq(201)
+        expect(item[:data][:attributes][:name]).to eq("test")
+        expect(item[:data][:attributes][:description]).to eq("lorem ipsum")
+        expect(item[:data][:attributes][:unit_price]).to eq(19.5)
+        expect(item[:data][:attributes][:merchant_id]).to eq(merchant.id)
+        expect(Item.count).to eq(1)
+      end
+    end
+    describe 'Sad Path' do
+      it 'returns a fail when user enters no params' do
+        merchant = create :merchant
+        post '/api/v1/items'
+
+        item = JSON.parse(response.body, symbolize_names: true)
+        expect(item[:errors]).to be_a(Array)
+        expect(response.status).to eq(400)
       end
     end
   end

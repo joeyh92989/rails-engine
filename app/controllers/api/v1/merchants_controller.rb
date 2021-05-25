@@ -20,12 +20,11 @@ class Api::V1::MerchantsController < ApplicationController
 
   def show
     if Merchant.where(id: params[:id]) == []
-      merchant= []
+      merchant = []
       render json: MerchantSerializer.new(merchant), status: :not_found
     else
-      merchant= Merchant.find(params[:id])
+      merchant = Merchant.find(params[:id])
       render json: MerchantSerializer.new(merchant)
     end
-
   end
 end

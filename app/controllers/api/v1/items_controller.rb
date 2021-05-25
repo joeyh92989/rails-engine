@@ -20,12 +20,25 @@ class Api::V1::ItemsController < ApplicationController
 
   def show
     if Item.where(id: params[:id]) == []
-      item= []
+      item = []
       render json: ItemSerializer.new(item), status: :not_found
     else
-      item= Item.find(params[:id])
+      item = Item.find(params[:id])
       render json: ItemSerializer.new(item)
     end
+  end
+  def create
+    item = Item.new(item_params)
+    if item.save
+      render json: ItemSerializer.new(item), status: :created
+    else
+      render json: { :errors => item.errors.full_messages }, status: :bad_request
+    end
+  end
 
+  private
+
+  def item_params
+    params.permit(:name, :description, :unit_price, :merchant_id)
   end
 end
