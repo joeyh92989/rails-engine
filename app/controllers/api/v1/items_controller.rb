@@ -36,7 +36,7 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
   def update
-
+    #come back and fix edge case with swapping out merchant_id for a merchant that doesn't exist
     if Item.where(id: params[:id]) == []
       item = []
       render json: ItemSerializer.new(item), status: :not_found

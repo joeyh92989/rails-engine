@@ -181,5 +181,17 @@ describe 'Items' do
         expect(item_resp[:data][:attributes][:merchant_id]).to eq(merchant.id)
       end
     end
+    describe 'Sad Path' do
+      it 'finds no item' do
+        item_1 = create :item, id: 1
+
+        patch '/api/v1/items/50'
+        item = JSON.parse(response.body, symbolize_names: true)
+        expect(response.status).to eq(404)
+        expect(item.count).to eq(1)
+        expect(item).to be_a Hash
+        expect(item[:data]).to eq([])
+      end
+    end
   end
 end
