@@ -15,6 +15,7 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - './*'
+    - 'spec'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
