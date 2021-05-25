@@ -15,6 +15,7 @@ describe 'Items' do
         expect(items[:data].first[:attributes]).to have_key(:name)
         expect(items[:data].first[:attributes]).to have_key(:description)
         expect(items[:data].first[:attributes]).to have_key(:unit_price)
+        expect(items[:data].first[:attributes]).to have_key(:merchant_id)
       end
 
       it 'sends a list of items with a page request, and returns expected volume' do
