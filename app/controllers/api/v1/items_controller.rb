@@ -47,6 +47,17 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if Item.where(id: params[:id]) == []
+      item = []
+      render json: ItemSerializer.new(item), status: :not_found
+    else
+      item = Item.find(params[:id])
+      item.delete
+      render json: ItemSerializer.new(item)
+    end
+  end
+
   private
 
   def item_params

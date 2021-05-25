@@ -194,4 +194,24 @@ describe 'Items' do
       end
     end
   end
+  describe 'item delete' do
+    describe 'Happy Path' do
+      it 'can delete an item' do
+        merchant = create :merchant
+        item = create :item, id: 1, merchant: merchant
+        delete '/api/v1/items/1'
+        item_resp = JSON.parse(response.body, symbolize_names: true)
+
+        expect(item_resp[:data][:attributes][:name]).to eq(item.name)
+        expect(item_resp[:data][:attributes][:description]).to eq(item.description)
+        expect(item_resp[:data][:attributes][:unit_price]).to eq(item.unit_price)
+        expect(item_resp[:data][:attributes][:merchant_id]).to eq(merchant.id)
+        expect(Item.count).to eq(0)
+      end
+    end
+    # describe 'Sad Path' do
+    #   it 'cant find the item to delete' do
+    #   end
+    # end
+  end
 end
