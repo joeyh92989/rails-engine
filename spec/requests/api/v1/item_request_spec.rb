@@ -130,8 +130,8 @@ describe 'Items' do
 
         expect(response).to be_successful
         expect(response.status).to eq(201)
-        expect(item[:data][:attributes][:name]).to eq("test")
-        expect(item[:data][:attributes][:description]).to eq("lorem ipsum")
+        expect(item[:data][:attributes][:name]).to eq('test')
+        expect(item[:data][:attributes][:description]).to eq('lorem ipsum')
         expect(item[:data][:attributes][:unit_price]).to eq(19.5)
         expect(item[:data][:attributes][:merchant_id]).to eq(merchant.id)
         expect(Item.count).to eq(1)
@@ -145,6 +145,40 @@ describe 'Items' do
         item = JSON.parse(response.body, symbolize_names: true)
         expect(item[:errors]).to be_a(Array)
         expect(response.status).to eq(400)
+      end
+    end
+  end
+  describe 'item update' do
+    describe 'Happy Path' do
+      it 'can update an item name' do
+        merchant = create :merchant
+        item = create :item, name: 'Steve', id: 1, merchant: merchant
+        patch '/api/v1/items/1', params: { name: 'test' }
+        item_resp = JSON.parse(response.body, symbolize_names: true)
+        expect(item_resp[:data][:attributes][:name]).to eq('test')
+        expect(item_resp[:data][:attributes][:description]).to eq(item.description)
+        expect(item_resp[:data][:attributes][:unit_price]).to eq(item.unit_price)
+        expect(item_resp[:data][:attributes][:merchant_id]).to eq(merchant.id)
+      end
+      it 'can update an item description' do
+        merchant = create :merchant
+        item = create :item, description: 'i like candy', id: 1, merchant: merchant
+        patch '/api/v1/items/1', params: { description: 'my favorite is gummy bears' }
+        item_resp = JSON.parse(response.body, symbolize_names: true)
+        expect(item_resp[:data][:attributes][:name]).to eq(item.name)
+        expect(item_resp[:data][:attributes][:description]).to eq('my favorite is gummy bears')
+        expect(item_resp[:data][:attributes][:unit_price]).to eq(item.unit_price)
+        expect(item_resp[:data][:attributes][:merchant_id]).to eq(merchant.id)
+      end
+      it 'can update an item price' do
+        merchant = create :merchant
+        item = create :item, unit_price: 19.99, id: 1, merchant: merchant
+        patch '/api/v1/items/1', params: { unit_price: 15.00 }
+        item_resp = JSON.parse(response.body, symbolize_names: true)
+        expect(item_resp[:data][:attributes][:name]).to eq(item.name)
+        expect(item_resp[:data][:attributes][:description]).to eq(item.description)
+        expect(item_resp[:data][:attributes][:unit_price]).to eq(15.00)
+        expect(item_resp[:data][:attributes][:merchant_id]).to eq(merchant.id)
       end
     end
   end

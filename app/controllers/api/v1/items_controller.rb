@@ -35,6 +35,17 @@ class Api::V1::ItemsController < ApplicationController
       render json: { :errors => item.errors.full_messages }, status: :bad_request
     end
   end
+  def update
+
+    if Item.where(id: params[:id]) == []
+      item = []
+      render json: ItemSerializer.new(item), status: :not_found
+    else
+      item = Item.find(params[:id])
+      item.update(item_params)
+      render json: ItemSerializer.new(item)
+    end
+  end
 
   private
 
