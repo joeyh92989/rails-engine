@@ -25,6 +25,18 @@ describe 'Merchants' do
 
         expect(merchants[:data].count).to eq(10)
       end
+      it 'sends a list of Merchants with no page request, and returns expected volume starting at 1st record' do
+        create_list(:merchant, 50)
+
+        get '/api/v1/merchants', params: { per_page: 30 }
+
+        expect(response).to be_successful
+        merchants = JSON.parse(response.body, symbolize_names: true)
+
+        expect(merchants[:data].count).to eq(30)
+        expect(Merchant.first.name).to eq(merchants[:data].first[:attributes][:name])
+        expect(Merchant.all[29].name).to eq(merchants[:data].last[:attributes][:name])
+      end
     end
 
     describe 'Sad Path' do
@@ -50,6 +62,18 @@ describe 'Merchants' do
         merchants = JSON.parse(response.body, symbolize_names: true)
         expect(Merchant.first.name).to eq(merchants[:data].first[:attributes][:name])
         expect(Merchant.last.name).to eq(merchants[:data].last[:attributes][:name])
+      end
+      it 'returns first 20 results if requested per_page is equal to or less than 0' do
+        create_list(:merchant, 20)
+
+        get '/api/v1/merchants', params: { per_page: 0 }
+        expect(response).to be_successful
+        merchants = JSON.parse(response.body, symbolize_names: true)
+        expect(merchants[:data].count).to eq(20)
+        get '/api/v1/merchants', params: { per_page: -1 }
+        expect(response).to be_successful
+        merchants = JSON.parse(response.body, symbolize_names: true)
+        expect(merchants[:data].count).to eq(20)
       end
     end
   end
