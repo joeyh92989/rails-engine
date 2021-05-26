@@ -4,7 +4,7 @@ class Item < ApplicationRecord
 
   belongs_to :merchant
   has_many :invoice_items, dependent: :destroy
-  has_many :invoices, through: :invoice_items
+  has_many :invoices, through: :invoice_items, dependent: :destroy
   def lone_invoice
     self.invoices.find_all { |invoice| invoice.items.count == 1 }
   end

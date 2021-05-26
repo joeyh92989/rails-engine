@@ -53,8 +53,9 @@ class Api::V1::ItemsController < ApplicationController
       render json: ItemSerializer.new(item), status: :not_found
     else
       item = Item.find(params[:id])
-      item.delete
-      render json: ItemSerializer.new(item)
+      invoices = item.lone_invoice
+      item.destroy
+      invoices.each{|invoice| invoice.destroy}
     end
   end
 
