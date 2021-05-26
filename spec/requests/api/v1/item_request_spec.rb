@@ -208,6 +208,18 @@ describe 'Items' do
         expect(item_resp[:data][:attributes][:merchant_id]).to eq(merchant.id)
         expect(Item.count).to eq(0)
       end
+      it 'can delete an invoice if the item being destroyed is the only one on the invoice' do
+        merchant = create :merchant
+        item = create :item, id: 1, merchant: merchant
+        delete '/api/v1/items/1'
+        item_resp = JSON.parse(response.body, symbolize_names: true)
+
+        expect(item_resp[:data][:attributes][:name]).to eq(item.name)
+        expect(item_resp[:data][:attributes][:description]).to eq(item.description)
+        expect(item_resp[:data][:attributes][:unit_price]).to eq(item.unit_price)
+        expect(item_resp[:data][:attributes][:merchant_id]).to eq(merchant.id)
+        expect(Item.count).to eq(0)
+      end
     end
     # describe 'Sad Path' do
     #   it 'cant find the item to delete' do
