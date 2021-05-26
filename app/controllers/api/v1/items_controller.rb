@@ -27,16 +27,18 @@ class Api::V1::ItemsController < ApplicationController
       render json: ItemSerializer.new(item)
     end
   end
+
   def create
     item = Item.new(item_params)
     if item.save
       render json: ItemSerializer.new(item), status: :created
     else
-      render json: { :errors => item.errors.full_messages }, status: :bad_request
+      render json: { errors: item.errors.full_messages }, status: :bad_request
     end
   end
+
   def update
-    #come back and fix edge case with swapping out merchant_id for a merchant that doesn't exist
+    # come back and fix edge case with swapping out merchant_id for a merchant that doesn't exist
     if Item.where(id: params[:id]) == []
       item = []
       render json: ItemSerializer.new(item), status: :not_found
@@ -55,7 +57,7 @@ class Api::V1::ItemsController < ApplicationController
       item = Item.find(params[:id])
       invoices = item.lone_invoice
       item.destroy
-      invoices.each{|invoice| invoice.destroy}
+      invoices.each { |invoice| invoice.destroy }
     end
   end
 

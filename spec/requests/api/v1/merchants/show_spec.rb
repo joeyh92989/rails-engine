@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'Merchants' do
-
   describe 'merchants show' do
     describe 'Happy Path' do
       it 'returns one merchant' do

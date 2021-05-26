@@ -37,7 +37,7 @@ describe 'Items' do
     end
     describe 'Sad Path' do
       it 'cant find the item to delete' do
-        delete "/api/v1/items/20"
+        delete '/api/v1/items/20'
         expect(response.status).to eq(404)
       end
     end
