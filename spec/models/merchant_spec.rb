@@ -83,11 +83,12 @@ RSpec.describe Merchant, type: :model do
       # HINT: Invoices must have a successful transaction and be shipped to the customer to be considered as revenue.
 
 
-      actual = Merchant.merchants_ordered_by_rev.map do |merchant|
+      actual = Merchant.merchants_ordered_by_rev(5).map do |merchant|
         merchant
       end
       expected = [merchant_3, merchant_2, merchant_6, merchant_5]
       expect(actual).to eq(expected)
+      expect(actual.count).to eq(4)
     end
   end
   describe 'instance methods' do
