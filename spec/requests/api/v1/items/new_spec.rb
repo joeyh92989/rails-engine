@@ -21,7 +21,7 @@ describe 'Items' do
     end
     describe 'Sad Path' do
       it 'returns a fail when user enters no params' do
-        merchant = create :merchant
+        create :merchant
         post '/api/v1/items'
 
         item = JSON.parse(response.body, symbolize_names: true)

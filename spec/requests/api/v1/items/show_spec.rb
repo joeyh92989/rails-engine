@@ -4,9 +4,9 @@ describe 'Items' do
   describe 'items show' do
     describe 'Happy Path' do
       it 'returns one Item' do
-        item_1 = create :item
+        create :item, id: 1
 
-        get "/api/v1/items/#{item_1.id}"
+        get '/api/v1/items/1'
         item = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to be_successful
@@ -19,7 +19,7 @@ describe 'Items' do
 
     describe 'Sad Path' do
       it 'returns no Item if sent bad id' do
-        item_1 = create :item, id: 1
+        create :item, id: 1
 
         get '/api/v1/items/50'
         item = JSON.parse(response.body, symbolize_names: true)

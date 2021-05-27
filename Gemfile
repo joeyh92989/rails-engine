@@ -43,9 +43,9 @@ group :test do
   gem 'webmock'
   gem 'vcr'
   gem 'shoulda-matchers'
-    gem 'simplecov'
+  gem 'simplecov'
   gem 'orderly'
-    gem 'rspec-rails'
+  gem 'rspec-rails'
 end
 
 

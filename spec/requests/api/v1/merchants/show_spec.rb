@@ -4,9 +4,9 @@ describe 'Merchants' do
   describe 'merchants show' do
     describe 'Happy Path' do
       it 'returns one merchant' do
-        merchant_1 = create :merchant
+        create :merchant, id: 1
 
-        get "/api/v1/merchants/#{merchant_1.id}"
+        get '/api/v1/merchants/1'
         merchant = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to be_successful
@@ -19,7 +19,7 @@ describe 'Merchants' do
 
     describe 'Sad Path' do
       it 'returns no merchant if sent bad id' do
-        merchant_1 = create :merchant, id: 1
+        create :merchant, id: 1
 
         get '/api/v1/merchants/50'
         merchant = JSON.parse(response.body, symbolize_names: true)
