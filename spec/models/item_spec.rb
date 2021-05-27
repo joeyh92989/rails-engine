@@ -129,8 +129,8 @@ RSpec.describe Item, type: :model do
       invoice6a.invoice_items.create!(item: item6, quantity: 6, unit_price: 1)
       invoice6b.invoice_items.create!(item: item6, quantity: 2, unit_price: 3)
 
-      expect(Item.items_sorted_by_rev(2)).to eq([item3,item2])
-      expect(Item.items_sorted_by_rev(5)).to eq([item3,item2,item6,item5])
+      expect(Item.items_sorted_by_rev(2)).to eq([item3, item2])
+      expect(Item.items_sorted_by_rev(5)).to eq([item3, item2, item6, item5])
     end
   end
 end
