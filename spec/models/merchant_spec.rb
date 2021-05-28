@@ -89,14 +89,14 @@ RSpec.describe Merchant, type: :model do
       expect(actual).to eq(expected)
       expect(actual.count).to eq(4)
     end
-    it "can return a list of merchants by name search" do 
-      merchant1 = create :merchant, name: "Steves Goods"
-      merchant2 = create :merchant, name: "Ricks Wares "
-      merchant3 = create :merchant, name: "Joes Electronics"
-      merchant4 = create :merchant, name: "ABCDE and Stuff"
-      expect(Merchant.find_all_by_name("Steves")).to eq([merchant1])
-      expect(Merchant.find_all_by_name("es")).to eq([merchant3,merchant2,merchant1])
-      expect(Merchant.find_all_by_name("stuff")).to eq([merchant4])
+    it 'can return a list of merchants by name search' do
+      merchant1 = create :merchant, name: 'Steves Goods'
+      merchant2 = create :merchant, name: 'Ricks Wares '
+      merchant3 = create :merchant, name: 'Joes Electronics'
+      merchant4 = create :merchant, name: 'ABCDE and Stuff'
+      expect(Merchant.find_all_by_name('Steves')).to eq([merchant1])
+      expect(Merchant.find_all_by_name('es')).to eq([merchant3, merchant2, merchant1])
+      expect(Merchant.find_all_by_name('stuff')).to eq([merchant4])
     end
   end
   describe 'instance methods' do

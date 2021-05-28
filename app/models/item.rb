@@ -34,9 +34,11 @@ class Item < ApplicationRecord
   def self.find_by_price(min, max)
     where("items.unit_price >= #{min} AND items.unit_price <= #{max}").first
   end
+
   def self.find_by_price_max(max)
     where("items.unit_price <= #{max}").first
   end
+
   def self.find_by_price_min(min)
     where("items.unit_price >= #{min}").first
   end

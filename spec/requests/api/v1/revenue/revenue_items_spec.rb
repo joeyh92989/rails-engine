@@ -10,7 +10,7 @@ describe 'Revenue' do
     @merchant7 = create :merchant
     @merchant8 = create :merchant
     @merchant9 = create :merchant
-    @merchant10= create :merchant
+    @merchant10 = create :merchant
 
     @customer = create :customer
 
@@ -28,9 +28,9 @@ describe 'Revenue' do
     @invoice2 = @merchant2.invoices.create!(status: 'shipped', customer: @customer)
     @invoice2a = @merchant2.invoices.create!(status: 'shipped', customer: @customer)
     @invoice2.transactions.create!(result: 'success', credit_card_number: '12345',
-                                  credit_card_expiration_date: '08-24-25')
-    @invoice2a.transactions.create!(result: 'success', credit_card_number: '12345',
                                    credit_card_expiration_date: '08-24-25')
+    @invoice2a.transactions.create!(result: 'success', credit_card_number: '12345',
+                                    credit_card_expiration_date: '08-24-25')
     @invoice2.invoice_items.create!(item: @item2, quantity: 2, unit_price: 10)
     @invoice2a.invoice_items.create!(item: @item2, quantity: 10, unit_price: 1)
 
@@ -38,9 +38,9 @@ describe 'Revenue' do
     @invoice3a = @merchant3.invoices.create!(status: 'shipped', customer: @customer)
     @invoice3b = @merchant3.invoices.create!(status: 'shipped', customer: @customer)
     @invoice3a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice3b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice3a.invoice_items.create!(item: @item3, quantity: 10, unit_price: 10)
     @invoice3b.invoice_items.create!(item: @item3, quantity: 10, unit_price: 1)
 
@@ -48,9 +48,9 @@ describe 'Revenue' do
     @invoice4a = @merchant4.invoices.create!(status: 'shipped', customer: @customer)
     @invoice4b = @merchant4.invoices.create!(status: 'shipped', customer: @customer)
     @invoice4a.transactions.create!(result: 'failed', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice4b.transactions.create!(result: 'failed', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice4a.invoice_items.create!(item: @item4, quantity: 1, unit_price: 1)
     @invoice4b.invoice_items.create!(item: @item4, quantity: 1, unit_price: 1)
 
@@ -58,9 +58,9 @@ describe 'Revenue' do
     @invoice5a = @merchant5.invoices.create!(status: 'shipped', customer: @customer)
     @invoice5b = @merchant5.invoices.create!(status: 'shipped', customer: @customer)
     @invoice5a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice5b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice5a.invoice_items.create!(item: @item5, quantity: 5, unit_price: 1)
     @invoice5b.invoice_items.create!(item: @item5, quantity: 1, unit_price: 5)
 
@@ -68,45 +68,45 @@ describe 'Revenue' do
     @invoice6a = @merchant6.invoices.create!(status: 'shipped', customer: @customer)
     @invoice6b = @merchant6.invoices.create!(status: 'shipped', customer: @customer)
     @invoice6a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice6b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice6a.invoice_items.create!(item: @item6, quantity: 6, unit_price: 1)
     @invoice6b.invoice_items.create!(item: @item6, quantity: 2, unit_price: 3)
     # 18 dollars
     @invoice7a = @merchant7.invoices.create!(status: 'shipped', customer: @customer)
     @invoice7b = @merchant7.invoices.create!(status: 'shipped', customer: @customer)
     @invoice7a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice7b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice7a.invoice_items.create!(item: @item7, quantity: 6, unit_price: 2)
     @invoice7b.invoice_items.create!(item: @item7, quantity: 2, unit_price: 3)
     # 14 dollars
     @invoice8a = @merchant8.invoices.create!(status: 'shipped', customer: @customer)
     @invoice8b = @merchant8.invoices.create!(status: 'shipped', customer: @customer)
     @invoice8a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice8b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice8a.invoice_items.create!(item: @item8, quantity: 4, unit_price: 2)
     @invoice8b.invoice_items.create!(item: @item8, quantity: 2, unit_price: 3)
     # 26 dollars
     @invoice9a = @merchant9.invoices.create!(status: 'shipped', customer: @customer)
     @invoice9b = @merchant9.invoices.create!(status: 'shipped', customer: @customer)
     @invoice9a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice9b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice9a.invoice_items.create!(item: @item9, quantity: 10, unit_price: 2)
     @invoice9b.invoice_items.create!(item: @item9, quantity: 2, unit_price: 3)
-        # 46 dollars
+    # 46 dollars
     @invoice10a = @merchant10.invoices.create!(status: 'shipped', customer: @customer)
     @invoice10b = @merchant10.invoices.create!(status: 'shipped', customer: @customer)
     @invoice10a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                     credit_card_expiration_date: '08-24-25')
     @invoice10b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                     credit_card_expiration_date: '08-24-25')
     @invoice10a.invoice_items.create!(item: @item10, quantity: 20, unit_price: 2)
     @invoice10b.invoice_items.create!(item: @item10, quantity: 2, unit_price: 3)
   end

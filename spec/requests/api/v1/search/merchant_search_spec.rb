@@ -4,7 +4,7 @@ describe 'Merchants Search' do
   describe 'merchants' do
     describe 'Happy Path' do
       it 'returns merchant objects' do
-        create :merchant, name: "Test"
+        create :merchant, name: 'Test'
 
         get '/api/v1/merchants/find_all?name=t'
         merchants = JSON.parse(response.body, symbolize_names: true)

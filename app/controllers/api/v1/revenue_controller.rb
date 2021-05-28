@@ -19,8 +19,9 @@ class Api::V1::RevenueController < ApplicationController
       render json: MerchantRevenueSerializer.new(merchant)
     end
   end
+
   def items_order_by_rev
-    params[:quantity] = 10 unless params[:quantity].present?
+    params[:quantity] = 10 if params[:quantity].blank?
     quantity = params[:quantity].to_i
 
     if quantity.positive?
@@ -30,8 +31,9 @@ class Api::V1::RevenueController < ApplicationController
       render json: { errors: 'Must include quantity as an integer' }, status: :bad_request
     end
   end
+
   def unshipped
-    params[:quantity] = 10 unless params[:quantity].present?
+    params[:quantity] = 10 if params[:quantity].blank?
     quantity = params[:quantity].to_i
 
     if quantity.positive?

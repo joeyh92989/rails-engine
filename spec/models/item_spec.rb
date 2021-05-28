@@ -150,6 +150,5 @@ RSpec.describe Item, type: :model do
       expect(Item.find_by_price_max(10)).to eq(item3)
       expect(Item.find_by_price_min(15)).to eq(item1)
     end
-    
   end
 end

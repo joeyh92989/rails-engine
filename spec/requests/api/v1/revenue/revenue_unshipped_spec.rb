@@ -28,7 +28,7 @@ describe 'Revenue Unshipped Items' do
     # 30 dollars in revenue for merchant 2
     @invoice2 = @merchant2.invoices.create!(status: 'packaged', customer: @customer)
     @invoice2.transactions.create!(result: 'success', credit_card_number: '12345',
-                                  credit_card_expiration_date: '08-24-25')
+                                   credit_card_expiration_date: '08-24-25')
     @invoice2.invoice_items.create!(item: @item2a, quantity: 2, unit_price: 10)
     @invoice2.invoice_items.create!(item: @item2b, quantity: 10, unit_price: 1)
 
@@ -36,9 +36,9 @@ describe 'Revenue Unshipped Items' do
     @invoice3a = @merchant3.invoices.create!(status: 'packaged', customer: @customer)
     @invoice3b = @merchant3.invoices.create!(status: 'packaged', customer: @customer)
     @invoice3a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice3b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice3a.invoice_items.create!(item: @item3a, quantity: 10, unit_price: 10)
     @invoice3b.invoice_items.create!(item: @item3b, quantity: 10, unit_price: 1)
 
@@ -46,9 +46,9 @@ describe 'Revenue Unshipped Items' do
     @invoice4a = @merchant4.invoices.create!(status: 'packaged', customer: @customer)
     @invoice4b = @merchant4.invoices.create!(status: 'packaged', customer: @customer)
     @invoice4a.transactions.create!(result: 'failed', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice4b.transactions.create!(result: 'failed', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice4a.invoice_items.create!(item: @item4a, quantity: 1, unit_price: 1)
     @invoice4b.invoice_items.create!(item: @item4b, quantity: 1, unit_price: 1)
 
@@ -56,9 +56,9 @@ describe 'Revenue Unshipped Items' do
     @invoice5a = @merchant5.invoices.create!(status: 'packaged', customer: @customer)
     @invoice5b = @merchant5.invoices.create!(status: 'packaged', customer: @customer)
     @invoice5a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice5b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice5a.invoice_items.create!(item: @item5a, quantity: 5, unit_price: 1)
     @invoice5b.invoice_items.create!(item: @item5b, quantity: 1, unit_price: 5)
 
@@ -66,9 +66,9 @@ describe 'Revenue Unshipped Items' do
     @invoice6a = @merchant6.invoices.create!(status: 'packaged', customer: @customer)
     @invoice6b = @merchant6.invoices.create!(status: 'packaged', customer: @customer)
     @invoice6a.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice6b.transactions.create!(result: 'success', credit_card_number: '12345',
-                                   credit_card_expiration_date: '08-24-25')
+                                    credit_card_expiration_date: '08-24-25')
     @invoice6a.invoice_items.create!(item: @item6a, quantity: 6, unit_price: 1)
     @invoice6b.invoice_items.create!(item: @item6b, quantity: 2, unit_price: 3)
   end
