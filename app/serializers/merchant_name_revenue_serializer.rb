@@ -1,6 +1,6 @@
 class MerchantNameRevenueSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :name
+  attributes :name
 
   attribute :revenue, &:total_rev
 end

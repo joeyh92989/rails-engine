@@ -82,7 +82,6 @@ describe 'Revenue' do
         expect(merchants[:data].count).to eq(3)
         expect(merchants).to be_a Hash
         expect(merchants[:data].first).to have_key(:attributes)
-        expect(merchants[:data].first[:attributes]).to have_key(:id)
         expect(merchants[:data].first[:attributes]).to have_key(:name)
         expect(merchants[:data].first[:attributes]).to have_key(:revenue)
       end
@@ -94,7 +93,6 @@ describe 'Revenue' do
         expect(merchants[:data].count).to eq(4)
         expect(merchants).to be_a Hash
         expect(merchants[:data].first).to have_key(:attributes)
-        expect(merchants[:data].first[:attributes]).to have_key(:id)
         expect(merchants[:data].first[:attributes]).to have_key(:name)
         expect(merchants[:data].first[:attributes]).to have_key(:revenue)
       end

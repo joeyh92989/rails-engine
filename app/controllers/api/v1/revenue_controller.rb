@@ -30,4 +30,15 @@ class Api::V1::RevenueController < ApplicationController
       render json: { errors: 'Must include quantity as an integer' }, status: :bad_request
     end
   end
+  def unshipped
+    params[:quantity] = 10 unless params[:quantity].present?
+    quantity = params[:quantity].to_i
+
+    if quantity.positive?
+      invoices = Invoice.invoices_sorted_by_rev(params[:quantity])
+      render json: UnshippedOrderSerializer.new(invoices)
+    else
+      render json: { errors: 'Must include quantity as an integer' }, status: :bad_request
+    end
+  end
 end
