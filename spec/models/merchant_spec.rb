@@ -96,7 +96,7 @@ RSpec.describe Merchant, type: :model do
       merchant4 = create :merchant, name: "ABCDE and Stuff"
       binding.pry
       expect(Merchant.find_all_by_name("Steves")).to eq([merchant1])
-      expect(Merchant.find_all_by_name("es")).to eq([merchant1,merchant2,merchant3])
+      expect(Merchant.find_all_by_name("es")).to eq([merchant3,merchant2,merchant1])
       expect(Merchant.find_all_by_name("stuff")).to eq([merchant4])
     end
   end
