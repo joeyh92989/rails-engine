@@ -57,7 +57,7 @@ class Api::V1::ItemsController < ApplicationController
       item = Item.find(params[:id])
       invoices = item.lone_invoice
       item.destroy
-      invoices.each { |invoice| invoice.destroy }
+      invoices.each(&:destroy)
     end
   end
 

@@ -36,7 +36,7 @@ describe 'Items' do
     end
     describe 'Sad Path' do
       it 'finds no item' do
-        item_1 = create :item, id: 1
+        create :item, id: 1
 
         patch '/api/v1/items/50'
         item = JSON.parse(response.body, symbolize_names: true)
