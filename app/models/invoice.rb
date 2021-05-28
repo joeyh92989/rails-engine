@@ -16,10 +16,11 @@ class Invoice < ApplicationRecord
       .order('total_revenue desc')
       .limit(quantity)
   end
+
   def total_rev
     transactions.joins(invoice: :invoice_items)
-            .where('transactions.result = ?', 'success')
-            .where('invoices.status = ?', 'packaged')
-            .sum('invoice_items.quantity * invoice_items.unit_price')
+                .where('transactions.result = ?', 'success')
+                .where('invoices.status = ?', 'packaged')
+                .sum('invoice_items.quantity * invoice_items.unit_price')
   end
 end
