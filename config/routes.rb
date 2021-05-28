@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get '/revenue/items', to: 'revenue#items_order_by_rev'
       get '/revenue/unshipped', to: 'revenue#unshipped'
       get '/revenue/merchants/:id', to: 'revenue#merchant_rev'
+      get '/merchants/find_all', to: 'search#merchant_search'
+      get '/items/find', to: 'search#item_search'
       resources :merchants, only: %i[index show]
       resources :items
       namespace :merchants do
