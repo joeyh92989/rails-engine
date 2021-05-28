@@ -31,14 +31,14 @@ class Item < ApplicationRecord
   end
 
   def self.find_by_price(min, max)
-    where("items.unit_price >= #{min} AND items.unit_price <= #{max}").first
+    where("items.unit_price >= #{min} AND items.unit_price <= #{max}").order(:name).first
   end
 
   def self.find_by_price_max(max)
-    where("items.unit_price <= #{max}").first
+    where("items.unit_price <= #{max}").order(:name).first
   end
 
   def self.find_by_price_min(min)
-    where("items.unit_price >= #{min}").first
+    where("items.unit_price >= #{min}").order(:name).first
   end
 end
