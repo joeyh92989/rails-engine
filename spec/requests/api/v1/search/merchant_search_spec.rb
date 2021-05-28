@@ -24,7 +24,6 @@ describe 'Merchants Search' do
 
         get '/api/v1/merchants/find_all?name=a'
         merchants = JSON.parse(response.body, symbolize_names: true)
-        binding.pry
         expect(response.status).to eq(404)
         expect(merchants).to be_a Hash
         expect(merchants[:data]).to eq([])
