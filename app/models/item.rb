@@ -28,10 +28,16 @@ class Item < ApplicationRecord
   end
 
   def self.find_by_name(name)
-    where('lower(name) LIKE :search', search: "%#{name}%").first
+    where('lower(name) LIKE :search', search: "%#{name.downcase}%").first
   end
 
   def self.find_by_price(min, max)
     where("items.unit_price >= #{min} AND items.unit_price <= #{max}").first
+  end
+  def self.find_by_price_max(max)
+    where("items.unit_price <= #{max}").first
+  end
+  def self.find_by_price_min(min)
+    where("items.unit_price >= #{min}").first
   end
 end
