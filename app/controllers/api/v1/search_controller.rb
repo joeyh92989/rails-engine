@@ -6,7 +6,8 @@ class Api::V1::SearchController < ApplicationController
       item = Item.find_by_name(params[:name])
 
       if item.nil?
-        render status: :not_found
+
+        render json: ItemSerializer.new(Item.new), status: :not_found
       else
         render json: ItemSerializer.new(item)
       end

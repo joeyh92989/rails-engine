@@ -62,9 +62,15 @@ describe 'item Search' do
       it 'returns no item if none found' do
         get '/api/v1/items/find?name=a'
         item = JSON.parse(response.body, symbolize_names: true)
+
         expect(response.status).to eq(404)
         expect(item).to be_a Hash
-        expect(item[:data]).to eq(nil)
+        expect(item[:data][:id]).to eq(nil)
+        expect(item[:data][:type]).to eq("item")
+        expect(item[:data][:attributes]).to have_key(:name)
+        expect(item[:data][:attributes]).to have_key(:unit_price)
+        expect(item[:data][:attributes]).to have_key(:description)
+        expect(item[:data][:attributes]).to have_key(:merchant_id)
       end
       it 'returns error if syntax is wrong' do
         get '/api/v1/items/find'
