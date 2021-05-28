@@ -1,5 +1,6 @@
 class Api::V1::SearchController < ApplicationController
   def item_search
+
     
     if params.key?(:name)
       item = Item.find_by_name(params[:name])
@@ -12,6 +13,7 @@ class Api::V1::SearchController < ApplicationController
     elsif params.key?(:max_price) && params.key?(:min_price)
 
       item = Item.find_by_price(params[:min_price], params[:max_price])
+
 
       if item.nil?
         render status: :not_found
@@ -32,11 +34,14 @@ class Api::V1::SearchController < ApplicationController
 
       if item.nil?
         render json: { data: {} }, status: :not_found
+
       else
         render json: ItemSerializer.new(item)
       end
     else
+
       render json: { error: 'search params incorrect' }, status: :bad_request
+
     end
   end
 
@@ -48,4 +53,6 @@ class Api::V1::SearchController < ApplicationController
       render json: MerchantSerializer.new(merchants), status: :not_found
     end
   end
+
 end
+
