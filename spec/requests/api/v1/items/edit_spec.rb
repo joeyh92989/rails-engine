@@ -45,6 +45,16 @@ describe 'Items' do
         expect(item).to be_a Hash
         expect(item[:data]).to eq([])
       end
+      it 'finds no mechant when updating merchant' do
+        create :item, id: 1
+
+        patch '/api/v1/items/1', params: { merchant_id: 3 }
+        item = JSON.parse(response.body, symbolize_names: true)
+        expect(response.status).to eq(404)
+        expect(item.count).to eq(1)
+        expect(item).to be_a Hash
+        expect(item[:errors]).to eq("Merchant not found")
+      end
     end
   end
 end

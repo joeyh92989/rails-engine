@@ -42,6 +42,15 @@ class Api::V1::ItemsController < ApplicationController
     if Item.where(id: params[:id]) == []
       item = []
       render json: ItemSerializer.new(item), status: :not_found
+    elsif params.key?(:merchant_id)
+      item = Item.find(params[:id])
+      merchant = Merchant.where(id: params[:merchant_id])
+      if merchant == []
+        render json: { errors: 'Merchant not found' }, status: :not_found
+      else
+        item.update(item_params)
+        render json: ItemSerializer.new(item)
+      end
     else
       item = Item.find(params[:id])
       item.update(item_params)

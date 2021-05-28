@@ -27,19 +27,22 @@ class Item < ApplicationRecord
             .sum('invoice_items.quantity * invoice_items.unit_price')
   end
 
+
   def self.find_by_name(name)
     where('lower(name) LIKE :search', search: "%#{name.downcase}%").first
   end
 
   def self.find_by_price(min, max)
-    where("items.unit_price >= #{min} AND items.unit_price <= #{max}").first
+
+    where("items.unit_price >= #{min} AND items.unit_price <= #{max}").order(:name).first
   end
 
   def self.find_by_price_max(max)
-    where("items.unit_price <= #{max}").first
+    where("items.unit_price <= #{max}").order(:name).first
   end
 
   def self.find_by_price_min(min)
-    where("items.unit_price >= #{min}").first
+    where("items.unit_price >= #{min}").order(:name).first
+
   end
 end

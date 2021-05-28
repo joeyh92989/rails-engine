@@ -72,8 +72,10 @@ describe 'item Search' do
         item = JSON.parse(response.body, symbolize_names: true)
         expect(response.status).to eq(400)
         expect(item).to be_a Hash
-        expect(item[:errors]).to eq('search params incorrect')
+
+        expect(item[:error]).to eq('search params incorrect')
       end
     end
   end
 end
+
