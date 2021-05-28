@@ -21,4 +21,8 @@ class Merchant < ApplicationRecord
             .where('invoices.status = ?', 'shipped')
             .sum('invoice_items.quantity * invoice_items.unit_price')
   end
+
+  def self.find_all_by_name(name)
+    where('lower(name) LIKE :search', search: "%#{name.downcase}%")
+  end
 end

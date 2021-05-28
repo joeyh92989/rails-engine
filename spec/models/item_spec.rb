@@ -132,5 +132,23 @@ RSpec.describe Item, type: :model do
       expect(Item.items_sorted_by_rev(2)).to eq([item3, item2])
       expect(Item.items_sorted_by_rev(5)).to eq([item3, item2, item6, item5])
     end
+    it 'can return an item by name search' do
+      item1 = create :item, name: 'spatula'
+      item2 = create :item, name: 'spoon'
+      item3 = create :item, name: 'fork'
+      item4 = create :item, name: 'knife'
+
+      expect(Item.find_by_name('kn')).to eq(item4)
+      expect(Item.find_by_name('spo')).to eq(item2)
+    end
+    it 'can return an item by by max or min search' do
+      item1 = create :item, name: 'spatula', unit_price: 15.00
+      item2 = create :item, name: 'spoon', unit_price: 20.00
+      item3 = create :item, name: 'fork', unit_price: 10.00
+      item4 = create :item, name: 'knife', unit_price: 12.00
+      binding.pry
+      expect(Item.find_by_price(10, 15)).to eq(item1)
+      expect(Item.find_by_price(20,20)).to eq(item2)
+    end
   end
 end
