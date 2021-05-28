@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get '/revenue/merchants', to: 'revenue#merchants_order_by_rev'
+      get '/revenue/items', to: 'revenue#items_order_by_rev'
       get '/revenue/merchants/:id', to: 'revenue#merchant_rev'
       resources :merchants, only: %i[index show]
       resources :items
