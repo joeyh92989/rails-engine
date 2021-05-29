@@ -28,7 +28,7 @@ class Item < ApplicationRecord
   end
 
   def self.find_using_name(name)
-    where('lower(name) LIKE :search', search: "%#{name.downcase}%").first
+    find_by('lower(name) LIKE :search', search: "%#{name.downcase}%")
   end
 
   def self.find_using_price(min, max)

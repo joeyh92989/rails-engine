@@ -1,4 +1,5 @@
 class Api::V1::SearchController < ApplicationController
+  #this method covers routing item search requests and errors handeling for helper methods
   def item_search
     if params.key?(:name) && !params.key?(:min_price) && !params.key?(:max_price)
       name_search
