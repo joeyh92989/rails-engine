@@ -7,7 +7,7 @@ describe 'item Search' do
         create :item, name: 'Test'
         create :item, unit_price: 100
 
-        get '/api/v1/items/find?name=T'
+        get '/api/v1/items/find', params: { name: 'T' }
         item = JSON.parse(response.body, symbolize_names: true)
         expect(response).to be_successful
         expect(item.count).to eq(1)
@@ -18,7 +18,7 @@ describe 'item Search' do
         expect(item[:data][:attributes]).to have_key(:unit_price)
         expect(item[:data][:attributes]).to have_key(:merchant_id)
 
-        get '/api/v1/items/find?max_price=150&min_price=50'
+        get '/api/v1/items/find', params: { max_price: 150, min_price: 50 }
         item2 = JSON.parse(response.body, symbolize_names: true)
 
         expect(response).to be_successful
@@ -32,7 +32,7 @@ describe 'item Search' do
       end
       it 'returns  an item with max  price param' do
         create :item, unit_price: 100
-        get '/api/v1/items/find?max_price=120'
+        get '/api/v1/items/find', params: { max_price: 120 }
         item2 = JSON.parse(response.body, symbolize_names: true)
         expect(response).to be_successful
         expect(item2.count).to eq(1)
@@ -45,7 +45,7 @@ describe 'item Search' do
       end
       it 'returns  an item with min  price param' do
         create :item, unit_price: 100
-        get '/api/v1/items/find?min_price=100'
+        get '/api/v1/items/find', params: { min_price: 100 }
         item2 = JSON.parse(response.body, symbolize_names: true)
         expect(response).to be_successful
         expect(item2.count).to eq(1)
@@ -60,7 +60,7 @@ describe 'item Search' do
 
     describe 'Sad Path' do
       it 'returns no item if none found' do
-        get '/api/v1/items/find?name=a'
+        get '/api/v1/items/find', params: {  name: 'a' }
         item = JSON.parse(response.body, symbolize_names: true)
 
         expect(response.status).to eq(404)
@@ -79,6 +79,24 @@ describe 'item Search' do
         expect(response.status).to eq(400)
         expect(item).to be_a Hash
 
+        expect(item[:error]).to eq('search params incorrect')
+      end
+      it 'returns error if name and max is used' do
+        get '/api/v1/items/find', params: { max_price: 150, name: 'a' }
+
+        item = JSON.parse(response.body, symbolize_names: true)
+
+        expect(response.status).to eq(400)
+        expect(item).to be_a Hash
+        expect(item[:error]).to eq('search params incorrect')
+      end
+      it 'returns error if name and min is used' do
+        get '/api/v1/items/find', params: { min_price: 150, name: 'a' }
+
+        item = JSON.parse(response.body, symbolize_names: true)
+        binding.pry
+        expect(response.status).to eq(400)
+        expect(item).to be_a Hash
         expect(item[:error]).to eq('search params incorrect')
       end
     end

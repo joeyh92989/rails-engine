@@ -2,11 +2,11 @@ class Api::V1::SearchController < ApplicationController
   def item_search
     if params.key?(:name) && !params.key?(:min_price) && !params.key?(:max_price)
       name_search
-    elsif params.key?(:max_price) && params.key?(:min_price)
+    elsif params.key?(:max_price) && params.key?(:min_price) && !params.key?(:name)
       max_min_search
-    elsif params.key?(:max_price) && params[:max_price].to_f.positive?
+    elsif params.key?(:max_price) && params[:max_price].to_f.positive? && !params.key?(:name)
       max_search
-    elsif params.key?(:min_price) && params[:min_price].to_f.positive?
+    elsif params.key?(:min_price) && params[:min_price].to_f.positive? && !params.key?(:name)
       min_seach
     else
       render json: { error: 'search params incorrect' }, status: :bad_request
