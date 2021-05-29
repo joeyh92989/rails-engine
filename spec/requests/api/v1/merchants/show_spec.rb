@@ -25,7 +25,7 @@ describe 'Merchants' do
         merchant = JSON.parse(response.body, symbolize_names: true)
         expect(response.status).to eq(404)
         expect(merchant).to be_a Hash
-        expect(merchant[:data][:type]).to eq("merchant")
+        expect(merchant[:data][:type]).to eq('merchant')
         expect(merchant[:data]).to have_key(:attributes)
         expect(merchant[:data][:attributes]).to have_key(:name)
       end

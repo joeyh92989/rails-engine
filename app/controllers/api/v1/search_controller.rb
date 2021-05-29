@@ -1,7 +1,5 @@
 class Api::V1::SearchController < ApplicationController
   def item_search
-
-    
     if params.key?(:name)
       item = Item.find_by_name(params[:name])
 
