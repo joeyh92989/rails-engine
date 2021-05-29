@@ -1,7 +1,6 @@
 class Api::V1::MerchantsController < ApplicationController
   before_action :set_merchant, only: [:show]
   def index
-
     page = pages
     results_per_page = results_per_page_request
     if results_per_page >= Merchant.all.count
