@@ -1,5 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
-  before_action :set_item, only: %i[show update]
+  before_action :set_item, only: %i[show update destroy]
   before_action :set_merchant, only: %i[create]
   def index
     page = if params[:page].nil? || params[:page].to_i <= 0
@@ -40,7 +40,7 @@ class Api::V1::ItemsController < ApplicationController
   def update
     if @item.nil?
       render json: ItemSerializer.new(Item.new), status: :not_found
-    elsif  Merchant.find_by(id: params[:item][:merchant_id]).nil? && params[:item].key?(:merchant_id)
+    elsif Merchant.find_by(id: params[:item][:merchant_id]).nil? && params[:item].key?(:merchant_id)
       render json: { errors: 'Merchant not found' }, status: :not_found
     else
       @item.update(item_params)
@@ -49,13 +49,12 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    if Item.where(id: params[:id]) == []
-      item = []
-      render json: ItemSerializer.new(item), status: :not_found
+    if @item.nil?
+
+      render json: ItemSerializer.new(Item.new), status: :not_found
     else
-      item = Item.find(params[:id])
-      invoices = item.lone_invoice
-      item.destroy
+      invoices = @item.lone_invoice
+      @item.destroy
       invoices.each(&:destroy)
     end
   end
@@ -66,7 +65,7 @@ class Api::V1::ItemsController < ApplicationController
     @item = Item.find_by(id: params[:id])
   end
 
-  def set_merchant 
+  def set_merchant
     @merchant = if !@item.nil?
                   Merchant.find_by(id: @item.merchant_id)
                 elsif !params[:item].nil?
