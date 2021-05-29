@@ -14,10 +14,8 @@ class Api::V1::SearchController < ApplicationController
     elsif params.key?(:max_price) && params.key?(:min_price)
 
       item = Item.find_by_price(params[:min_price], params[:max_price])
-
-
       if item.nil?
-        render status: :not_found
+        render json: ItemSerializer.new(Item.new), status: :not_found
       else
         render json: ItemSerializer.new(item)
       end
@@ -25,16 +23,16 @@ class Api::V1::SearchController < ApplicationController
 
       item = Item.find_by_price_max(params[:max_price])
       if item.nil?
-        render  status: :not_found
+        render json: ItemSerializer.new(Item.new), status: :not_found
       else
-        
+
         render json: ItemSerializer.new(item)
       end
     elsif params.key?(:min_price) && params[:min_price].to_f.positive?
       item = Item.find_by_price_min(params[:min_price])
 
       if item.nil?
-        render json: { data: {} }, status: :not_found
+        render json: ItemSerializer.new(Item.new), status: :not_found
 
       else
         render json: ItemSerializer.new(item)
@@ -54,6 +52,4 @@ class Api::V1::SearchController < ApplicationController
       render json: MerchantSerializer.new(merchants), status: :not_found
     end
   end
-
 end
-
