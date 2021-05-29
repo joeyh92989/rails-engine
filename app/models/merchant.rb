@@ -22,7 +22,7 @@ class Merchant < ApplicationRecord
             .sum('invoice_items.quantity * invoice_items.unit_price')
   end
 
-  def self.find_all_by_name(name)
+  def self.find_all_using_name(name)
     where('lower(name) LIKE :search', search: "%#{name.downcase}%")
       .order(:name)
   end

@@ -94,7 +94,6 @@ describe 'item Search' do
         get '/api/v1/items/find', params: { min_price: 150, name: 'a' }
 
         item = JSON.parse(response.body, symbolize_names: true)
-        binding.pry
         expect(response.status).to eq(400)
         expect(item).to be_a Hash
         expect(item[:error]).to eq('search params incorrect')
