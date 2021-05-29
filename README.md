@@ -89,7 +89,7 @@ From your browser:
 
 * Thank you to Turing School of Software and Design for the inspiration and direction in building this application
 * Developed by Joey Haas
- + [Git Hub](https://github.com/joeyh92989) 
- + [LinkedIn](https://www.linkedin.com/in/haasjoseph/) 
+  + [Git Hub](https://github.com/joeyh92989) 
+  + [LinkedIn](https://www.linkedin.com/in/haasjoseph/) 
 
 
