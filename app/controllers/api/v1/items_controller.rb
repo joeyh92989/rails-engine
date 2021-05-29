@@ -1,4 +1,6 @@
 class Api::V1::ItemsController < ApplicationController
+  before_action :set_item, only: %i[show update]
+  before_action :set_merchant, only: %i[create]
   def index
     page = if params[:page].nil? || params[:page].to_i <= 0
              1
@@ -19,12 +21,10 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def show
-    if Item.where(id: params[:id]) == []
-      item = []
-      render json: ItemSerializer.new(item), status: :not_found
+    if @item.nil?
+      render json: ItemSerializer.new(Item.new), status: :not_found
     else
-      item = Item.find(params[:id])
-      render json: ItemSerializer.new(item)
+      render json: ItemSerializer.new(@item)
     end
   end
 
@@ -38,23 +38,13 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def update
-    # come back and fix edge case with swapping out merchant_id for a merchant that doesn't exist
-    if Item.where(id: params[:id]) == []
-      item = []
-      render json: ItemSerializer.new(item), status: :not_found
-    elsif params.key?(:merchant_id)
-      item = Item.find(params[:id])
-      merchant = Merchant.where(id: params[:merchant_id])
-      if merchant == []
-        render json: { errors: 'Merchant not found' }, status: :not_found
-      else
-        item.update(item_params)
-        render json: ItemSerializer.new(item)
-      end
+    if @item.nil?
+      render json: ItemSerializer.new(Item.new), status: :not_found
+    elsif  Merchant.find_by(id: params[:item][:merchant_id]).nil? && params[:item].key?(:merchant_id)
+      render json: { errors: 'Merchant not found' }, status: :not_found
     else
-      item = Item.find(params[:id])
-      item.update(item_params)
-      render json: ItemSerializer.new(item)
+      @item.update(item_params)
+      render json: ItemSerializer.new(@item)
     end
   end
 
@@ -74,8 +64,16 @@ class Api::V1::ItemsController < ApplicationController
 
   def set_item
     @item = Item.find_by(id: params[:id])
+  end
 
-   end
+  def set_merchant 
+    @merchant = if !@item.nil?
+                  Merchant.find_by(id: @item.merchant_id)
+                elsif !params[:item].nil?
+                  Merchant.find_by(id: params[:item][:merchant_id])
+                end
+  end
+
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
   end

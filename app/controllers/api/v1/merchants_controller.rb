@@ -20,7 +20,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    if @merchant == nil
+    if @merchant.nil?
       render json: MerchantSerializer.new(Merchant.new), status: :not_found
     else
       render json: MerchantSerializer.new(@merchant)
@@ -28,8 +28,8 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   private
+
   def set_merchant
     @merchant = Merchant.find_by(id: params[:id])
-
-   end
+  end
 end
