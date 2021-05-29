@@ -1,4 +1,5 @@
 class Api::V1::MerchantsController < ApplicationController
+  before_action :set_merchant, only: [:show]
   def index
     page = if params[:page].nil? || params[:page].to_i <= 0
              1
@@ -19,12 +20,16 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    if Merchant.where(id: params[:id]) == []
-      merchant = []
-      render json: MerchantSerializer.new(merchant), status: :not_found
+    if @merchant == nil
+      render json: MerchantSerializer.new(Merchant.new), status: :not_found
     else
-      merchant = Merchant.find(params[:id])
-      render json: MerchantSerializer.new(merchant)
+      render json: MerchantSerializer.new(@merchant)
     end
   end
+
+  private
+  def set_merchant
+    @merchant = Merchant.find_by(id: params[:id])
+
+   end
 end
