@@ -79,7 +79,7 @@ The Rails engine is an a app that allows a user to return data from a series of 
 
 ## Heroku
 From your browser:
-`https://joey-railsengine.herokuapp.com/`
+`https://joey-railsengine.herokuapp.com`
 
 
 
